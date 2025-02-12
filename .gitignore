@@ -1,0 +1,86 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+.env
+.venv
+ENV/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Testing
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+.pytest_cache/
+.mypy_cache/
+
+# Documentation
+docs/_build/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Logs
+*.log
+logs/
+
+# Local development
+.env.local
+.env.*.local
+*.local
+
+# Distribution
+dist/
+build/
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~.nib
+*.pyc
+*.pyo
+*.pyd
+
+# Environment configuration
+.python-version
+.env
+.env.*
+!.env.example
+
+# Editor directories and files
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw? 

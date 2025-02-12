@@ -1,0 +1,36 @@
+monitors:
+  - name: "Test CPU Monitor"
+    type: "metric alert"
+    query: "avg(last_5m):avg:system.cpu.user{*} > 90"
+    message: |
+      Test CPU alert message
+      {{#is_alert}}Alert state{{/is_alert}}
+      {{#is_recovery}}Recovery state{{/is_recovery}}
+    tags:
+      - "env:test"
+      - "service:test"
+    priority: 3
+    options:
+      notify_no_data: true
+      no_data_timeframe: 10
+      thresholds:
+        critical: 90
+        warning: 80
+        ok: 70
+
+  - name: "Test Memory Monitor"
+    type: "metric alert"
+    query: "avg(last_5m):avg:system.mem.used{*} / avg:system.mem.total{*} * 100 > 95"
+    message: |
+      Test memory usage alert
+      {{#is_alert}}Memory usage critical{{/is_alert}}
+      {{#is_recovery}}Memory usage normal{{/is_recovery}}
+    tags:
+      - "env:test"
+      - "service:test"
+    priority: 2
+    options:
+      notify_no_data: false
+      thresholds:
+        critical: 95
+        warning: 90 

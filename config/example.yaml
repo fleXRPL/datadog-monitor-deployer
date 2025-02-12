@@ -1,0 +1,68 @@
+monitors:
+  - name: "High CPU Usage Alert"
+    type: "metric alert"
+    query: "avg(last_5m):avg:system.cpu.user{*} > 80"
+    message: |
+      CPU usage is above 80%
+      
+      {{#is_alert}}
+      System is experiencing high CPU usage.
+      Please investigate immediately.
+      {{/is_alert}}
+      
+      {{#is_recovery}}
+      CPU usage has returned to normal levels.
+      {{/is_recovery}}
+    tags:
+      - "env:production"
+      - "service:web"
+      - "team:platform"
+    priority: 2
+    options:
+      notify_no_data: true
+      no_data_timeframe: 10
+      notify_audit: false
+      timeout_h: 0
+      evaluation_delay: 900
+      new_host_delay: 300
+      include_tags: true
+      require_full_window: false
+      renotify_interval: 60
+      thresholds:
+        critical: 80
+        warning: 70
+        ok: 60
+
+  - name: "High Error Rate Alert"
+    type: "query alert"
+    query: "sum(last_5m):sum:trace.servlet.request.errors{env:production} / sum:trace.servlet.request.hits{env:production} * 100 > 5"
+    message: |
+      Error rate is above 5%
+      
+      {{#is_alert}}
+      The application is experiencing a high error rate.
+      Current value: {{value}}%
+      
+      Please check:
+      1. Application logs
+      2. Recent deployments
+      3. Infrastructure health
+      {{/is_alert}}
+      
+      {{#is_recovery}}
+      Error rate has returned to normal levels.
+      {{/is_recovery}}
+    tags:
+      - "env:production"
+      - "service:api"
+      - "team:backend"
+    priority: 1
+    options:
+      notify_no_data: true
+      no_data_timeframe: 10
+      notify_audit: true
+      require_full_window: false
+      thresholds:
+        critical: 5
+        warning: 3
+        ok: 1 

@@ -1,0 +1,6 @@
+datadog>=0.45.0
+pyyaml>=6.0.1
+click>=8.1.7
+jsonschema>=4.20.0
+requests>=2.31.0
+python-dotenv>=1.0.0 
