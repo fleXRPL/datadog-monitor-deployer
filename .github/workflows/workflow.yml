@@ -1,0 +1,110 @@
+name: workflow
+
+on:
+  push:
+    branches: [ main ]
+    tags: [ 'v*' ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python-version: ['3.9', '3.10', '3.11', '3.12']
+
+    env:
+      DATADOG_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+      DATADOG_APP_KEY: ${{ secrets.DATADOG_APP_KEY }}
+      PYTHONIOENCODING: utf-8
+      PYTHONUTF8: 1
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Set up environment for Windows
+      if: runner.os == 'Windows'
+      run: |
+        echo "PYTHONIOENCODING=utf-8" >> $GITHUB_ENV
+        echo "PYTHONUTF8=1" >> $GITHUB_ENV
+      shell: bash
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements-dev.txt
+        pip install -e .
+      env:
+        PIP_NO_CACHE_DIR: "off"
+        PIP_DISABLE_PIP_VERSION_CHECK: "on"
+    - name: Check dependencies for security vulnerabilities
+      run: |
+        pip install safety
+        safety check
+    - name: Run tests and linting
+      run: |
+        isort src/datadog_monitor_deployer tests
+        black src/datadog_monitor_deployer tests
+        flake8 src/datadog_monitor_deployer tests
+        pytest tests/ --cov=datadog_monitor_deployer --cov-report=xml --cov-report=term-missing --cov-fail-under=90 --junitxml=test-results.xml
+
+    - name: Upload test results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-results-${{ matrix.os }}-${{ matrix.python-version }}
+        path: |
+          test-results.xml
+          coverage.xml
+
+  publish-test:
+    needs: test
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    environment: testpypi
+    permissions:
+      id-token: write
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install build
+    - name: Build package
+      run: python -m build
+    - name: Publish to TestPyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        repository-url: https://test.pypi.org/legacy/
+
+  publish:
+    needs: publish-test
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install build
+    - name: Build package
+      run: python -m build
+    - name: Publish to PyPI
+      uses: pypa/gh-action-pypi-publish@release/v1 

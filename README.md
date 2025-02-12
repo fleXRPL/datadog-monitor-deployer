@@ -1,9 +1,14 @@
 # Datadog Monitor Deployer
 
+[![PyPI version](https://img.shields.io/pypi/v/datadog-monitor-deployer.svg)](https://pypi.org/project/datadog-monitor-deployer/)
+[![Python Versions](https://img.shields.io/badge/python-3.9%20%7C%203.10%20%7C%203.11%20%7C%203.12-blue)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![CI/CD Pipeline](https://github.com/fleXRPL/datadog-monitor-deployer/actions/workflows/workflow.yml/badge.svg)](https://github.com/fleXRPL/datadog-monitor-deployer/actions/workflows/workflow.yml)
+[![Code Coverage](https://codecov.io/gh/fleXRPL/datadog-monitor-deployer/branch/main/graph/badge.svg)](https://codecov.io/gh/fleXRPL/datadog-monitor-deployer)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=fleXRPL_datadog-monitor-deployer&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=fleXRPL_datadog-monitor-deployer)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Security: bandit](https://img.shields.io/badge/security-bandit-yellow.svg)](https://github.com/PyCQA/bandit)
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![Downloads](https://static.pepy.tech/badge/datadog-monitor-deployer)](https://pepy.tech/project/datadog-monitor-deployer)
 
 A powerful and flexible tool for managing Datadog monitors as code. This project enables teams to define, deploy, and manage Datadog monitors using a declarative approach, supporting both YAML/JSON configurations and Python classes.
 
@@ -35,17 +40,20 @@ A powerful and flexible tool for managing Datadog monitors as code. This project
 ## 🚀 Quick Start
 
 1. Install the package:
+
 ```bash
 pip install datadog-monitor-deployer
 ```
 
 2. Set up your Datadog credentials:
+
 ```bash
 export DD_API_KEY="your-api-key"
 export DD_APP_KEY="your-app-key"
 ```
 
 3. Create a monitor definition (example.yaml):
+
 ```yaml
 monitors:
   - name: "High CPU Usage Alert"
@@ -61,6 +69,7 @@ monitors:
 ```
 
 4. Deploy your monitor:
+
 ```bash
 dd-monitor deploy example.yaml
 ```
@@ -78,23 +87,27 @@ For detailed documentation, visit our [Documentation Site](https://github.com/fl
 ## 🛠️ Development Setup
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/fleXRPL/datadog-monitor-deployer.git
 cd datadog-monitor-deployer
 ```
 
 2. Create and activate a virtual environment:
+
 ```bash
 python -m venv venv
 source venv/bin/activate  # On Windows: .\venv\Scripts\activate
 ```
 
 3. Install development dependencies:
+
 ```bash
 pip install -r requirements-dev.txt
 ```
 
 4. Run tests:
+
 ```bash
 pytest
 ```
@@ -117,4 +130,4 @@ This project is actively maintained and used in production environments. For the
 
 ---
 
-Built with ❤️ by the fleXRPL team 
+Built with ❤️ by the fleXRPL team

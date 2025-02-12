@@ -2,9 +2,11 @@ name: SonarCloud Analysis
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
   pull_request:
-    branches: [ main ]
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
 
 jobs:
   sonarcloud:
@@ -19,16 +21,18 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
-        python-version: "3.11"
+        python-version: '3.x'
         
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        pip install -r requirements.txt
         pip install -r requirements-dev.txt
+        pip install -e .
         
     - name: Run tests with coverage
       run: |
-        pytest --cov=datadog_monitor_deployer tests/ --cov-report=xml
+        pytest tests/ --cov=datadog_monitor_deployer --cov-report=xml --cov-report=term-missing
         
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@master
@@ -40,6 +44,10 @@ jobs:
           -Dsonar.organization=flexrpl
           -Dsonar.projectKey=fleXRPL_datadog-monitor-deployer
           -Dsonar.python.coverage.reportPaths=coverage.xml
-          -Dsonar.sources=src
+          -Dsonar.sources=src/datadog_monitor_deployer
           -Dsonar.tests=tests
-          -Dsonar.python.version=3.8,3.9,3.10,3.11 
+          -Dsonar.python.version=3
+          -Dsonar.sourceEncoding=UTF-8
+          -Dsonar.exclusions=docs/**,scripts/**
+          -Dsonar.coverage.exclusions=tests/**,docs/**,scripts/**
+          -Dsonar.python.xunit.reportPath=test-results.xml 

@@ -8,10 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.0] - 2024-02-11
 
 ### Added
+
 - Initial release
 - Core monitor management functionality
 - YAML/JSON configuration support
 - CLI interface
 - Comprehensive monitor type support
 - Idempotent operations
-- Test suite and documentation 
+- Test suite and documentation

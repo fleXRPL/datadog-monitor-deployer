@@ -3,7 +3,7 @@
 ## Supported Versions
 
 | Version | Supported          |
-| ------- | ----------------- |
+| ------- | ------------------ |
 | 0.1.x   | :white_check_mark: |
 
 ## Reporting a Vulnerability
@@ -27,4 +27,4 @@ When using this tool:
 4. Follow the principle of least privilege when configuring monitor permissions
 5. Regularly audit your monitor configurations and access controls
 
-Thank you for helping keep Datadog Monitor Deployer secure! 
+Thank you for helping keep Datadog Monitor Deployer secure!
