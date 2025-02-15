@@ -72,6 +72,10 @@ def list(monitor_id: Optional[str], name: Optional[str], tag: tuple):
         deployer = MonitorDeployer()
         monitors = deployer.list_monitors(monitor_id, name, list(tag))
 
+        if not monitors:
+            click.echo("No monitors found.")
+            return
+
         for monitor in monitors:
             click.echo(f"ID: {monitor['id']}")
             click.echo(f"Name: {monitor['name']}")
