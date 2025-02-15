@@ -1,14 +1,26 @@
 # Datadog Monitor Deployer
 
+#### versions
+
 [![PyPI version](https://img.shields.io/pypi/v/datadog-monitor-deployer.svg)](https://pypi.org/project/datadog-monitor-deployer/)
 [![Python Versions](https://img.shields.io/badge/python-3.9%20%7C%203.10%20%7C%203.11%20%7C%203.12-blue)](https://www.python.org/downloads/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![CI/CD Pipeline](https://github.com/fleXRPL/datadog-monitor-deployer/actions/workflows/workflow.yml/badge.svg)](https://github.com/fleXRPL/datadog-monitor-deployer/actions/workflows/workflow.yml)
-[![Code Coverage](https://codecov.io/gh/fleXRPL/datadog-monitor-deployer/branch/main/graph/badge.svg)](https://codecov.io/gh/fleXRPL/datadog-monitor-deployer)
+[![Python](https://img.shields.io/pypi/pyversions/datadog-monitor-deployer.svg)](https://pypi.org/project/datadog-monitor-deployer/)
+
+#### health
+
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=fleXRPL_datadog-monitor-deployer&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=fleXRPL_datadog-monitor-deployer)
+[![Overall Coverage](https://sonarcloud.io/api/project_badges/measure?project=fleXRPL_datadog-monitor-deployer&metric=coverage)](https://sonarcloud.io/summary/new_code?id=fleXRPL_datadog-monitor-deployer)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=fleXRPL_datadog-monitor-deployer&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=fleXRPL_datadog-monitor-deployer)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=fleXRPL_datadog-monitor-deployer&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=fleXRPL_datadog-monitor-deployer)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=fleXRPL_datadog-monitor-deployer&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=fleXRPL_datadog-monitor-deployer)
+[![Dependabot Status](https://img.shields.io/badge/Dependabot-enabled-success.svg)](https://github.com/fleXRPL/datadog-monitor-deployer/blob/main/.github/dependabot.yml)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![Security: bandit](https://img.shields.io/badge/security-bandit-yellow.svg)](https://github.com/PyCQA/bandit)
-[![Downloads](https://static.pepy.tech/badge/datadog-monitor-deployer)](https://pepy.tech/project/datadog-monitor-deployer)
+
+#### stats
+
+[![Downloads](https://pepy.tech/badge/datadog-monitor-deployer)](https://pepy.tech/project/datadog-monitor-deployer)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A powerful and flexible tool for managing Datadog monitors as code. This project enables teams to define, deploy, and manage Datadog monitors using a declarative approach, supporting both YAML/JSON configurations and Python classes.
 
